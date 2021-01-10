@@ -1,24 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
+import {BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
 import logo from './logo.svg';
 import './App.css';
+import { MyProfile } from './component/MyProfile';
+import { OtherProfile } from './component/OtherProfile';
+
 
 function App() {
+  const [user, changeUser] = useState({userid: 1, username: "TheGreatestUsernameEver", firstName: "John", lastName:"Smith"})
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+          <Route path="/myprofile">
+            <MyProfile user={user}/>
+          </Route>
+          <Route path="/otherprofile">
+            <OtherProfile user={user}/>
+          </Route>
+        </Router>
     </div>
   );
 }
