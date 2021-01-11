@@ -4,6 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 import { MyProfile } from './component/MyProfile';
 import { OtherProfile } from './component/OtherProfile';
+import { ClubRegistration } from './component/ClubRegistration';
 
 
 function App() {
@@ -17,6 +18,9 @@ function App() {
           </Route>
           <Route path="/otherprofile">
             <OtherProfile user={user}/>
+          </Route>
+          <Route path="/clubregistration">
+            <ClubRegistration/>
           </Route>
         </Router>
     </div>
