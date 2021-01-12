@@ -2,6 +2,7 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import axios from './axiosconfig';
+import LoginBorder from './LoginBorder';
 import './login.css';
 
 
@@ -69,8 +70,8 @@ console.log(data)
 
 return(
     
-    
-<div id="login-container">
+ <LoginBorder>   
+<div id="login-container" style={{marginTop:"10%"}}>
     <FormControl>
         <div className="input-field">
         <TextField label="User Name"  variant="outlined" name="user" onChange={this.handleChange}/>
@@ -81,6 +82,7 @@ return(
         <button type="submit" className="btn btn-outline-secondary" onClick={this.handleSubmit}>Login</button>
     </FormControl>
 </div>
+</LoginBorder>
 )
     }
 
