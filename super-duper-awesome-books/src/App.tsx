@@ -1,4 +1,5 @@
 import React from 'react';
+import LoginControl from './LoginControl'
 
 export default class App extends React.Component<any> {
   constructor(props: any){
@@ -7,9 +8,7 @@ export default class App extends React.Component<any> {
   
 
     render(){
-      return(<div>
-      <h1>Main Page!!!</h1>
-      </div>)
+      return(<LoginControl/>)
       }
       
       }
