@@ -24,7 +24,7 @@ const Book = ({ book }) => {
             <FancyBorder>
                 <div style={{
                     marginTop: "2em",
-                    marginLeft: "43%",
+                    marginLeft: '21%',
                     width: 500,
                 }}>
                     <img alt={`${book.volumeInfo.title} book`} src={`http://books.google.com/books/content?id=${book.id}&printsec=frontcover&img=1&zoom=1&source=gbs_api`} />
@@ -36,7 +36,7 @@ const Book = ({ book }) => {
                         <p>{bookAuthors(book.volumeInfo.authors)}</p>
                         <p>{book.volumeInfo.publishedDate}</p>
 
-                        <Link to={`/${book.id}`} style={{ textDecoration: 'none' }}>
+                        <Link to={`/book/${book.id}`} style={{ textDecoration: 'none' }}>
                             <Button variant="outlined" color="primary">
                                 Show Details
                             </Button>

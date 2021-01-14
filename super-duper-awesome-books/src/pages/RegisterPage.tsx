@@ -2,9 +2,7 @@ import React, { SyntheticEvent, useState } from 'react';
 import { Button, Grid, TextField } from '@material-ui/core'
 import axios from 'axios';
 import NavigationBar from '../components/navigation/NavigationBar';
-import { ToastContainer, toast } from 'react-toastify';
 import LoginBorder from '../components/fancy-border/LoginBorder';
-import FooterPage from '../components/footer/Footer';
 
 interface IRegister {
     username: string,
@@ -53,64 +51,61 @@ export const Register: React.FunctionComponent<IRegister> = (props) => {
             userPassword: password
         }
 
-        axios.post(`http://localhost:8080/users`, { newUser })
+        console.log(newUser)
+
+        let res = axios.post(`http://localhost:8080/register`, newUser)
             .then(res => {
                 console.log(res);
                 console.log(res.data);
             })
     }
-    // const submitLogin = async (e:SyntheticEvent) => {
-    //     //wwhat does submit normally do?
-    //     e.preventDefault()
-    //     //send username and password to a remote location to get the user info/auth token
-    //     try {
-    //         let user = await e720Login(username, password)
-    //         props.updateCurrentUser(user)
-    //     }catch(e){
-    //         changePassword("")
-    //         toast.error(e.message)
-    //     }
-    // }
 
 
     return (
         <div>
             <NavigationBar />
-            <LoginBorder>
-                <div style={{marginTop:'20%'}}>
-                    <form onSubmit={handleSubmit}>
-                        <Grid
-                            container
-                            direction="column"
-                            justify="flex-start"
-                            alignItems="center"
-                            spacing={2}
-                        >
-                            <Grid item>
-                                <div >
-                                    <TextField value={username} onChange={handleUsernameChange} id="username" label="Username" variant="outlined" autoComplete="off" /> &nbsp;
-                                <TextField value={password} onChange={handlePasswordChange} id="password" label="Password" variant="outlined" type="password" />
+            <div style={{ marginLeft: '40%', marginTop: '8%' }}>
+                <LoginBorder>
+                    <div style={{ marginTop: '5%' }}>
+                        <h6 style={{fontSize: '200%', color: 'grey'}}>Register</h6>
+                        <form onSubmit={handleSubmit}>
+                            <Grid
+                                container
+                                direction="column"
+                                // justify="flex-start"
+                                // alignItems="center"
+                                spacing={2}
+                            >
+                                <Grid item>
+                                    <div>
+                                        <TextField value={username} onChange={handleUsernameChange} id="username" label="Username" variant="outlined" autoComplete="off" /> &nbsp;
+                                    </div>
+                                    <div style={{ marginTop: '15px', marginRight: '10px' }}>
+                                        <TextField value={password} onChange={handlePasswordChange} id="password" label="Password" variant="outlined" type="password" />
 
-                                </div>
-                            </Grid>
-                            <Grid item>
-                                <TextField value={firstname} onChange={handleFirstnameChange} id="firstname" label="Firstname" variant="outlined" />  &nbsp;
-                            <TextField value={lastname} onChange={handleLastnameChange} id="lastname" label="Lastname" variant="outlined" />
-                            </Grid>
-                            <Grid item>
-                                <TextField value={email} onChange={handleEmailChange} id="email" label="Email" variant="outlined" type="email" />
-                            </Grid>
-                            <Grid item>
-                                <Button onClick={handleSubmit} href="/" type="submit" variant="outlined">Register</Button>
-                            </Grid>
+                                    </div>
+                                </Grid>
+                                <Grid item>
+                                    <TextField value={firstname} onChange={handleFirstnameChange} id="firstname" label="Firstname" variant="outlined" />  &nbsp;
+                                    <div style={{ marginTop: '15px', marginRight: '10px' }}>
+                                        <TextField value={lastname} onChange={handleLastnameChange} id="lastname" label="Lastname" variant="outlined" />
+                                    </div>
+                                </Grid>
+                                <Grid item>
+                                    <div style={{ marginBottom: '10px', marginRight: '10px' }}>
+                                        <TextField value={email} onChange={handleEmailChange} id="email" label="Email" variant="outlined" type="email" />
+                                    </div>
+                                </Grid>
+                                <Grid item>
+                                    <Button onClick={handleSubmit} href="/" type="submit" variant="outlined">Register</Button>
+                                </Grid>
 
-                        </Grid>
-                    </form>
+                            </Grid>
+                        </form>
+                    </div>
+                </LoginBorder>
+            </div>
 
-
-                </div>
-            </LoginBorder>
-            <FooterPage/>
         </div>
 
 

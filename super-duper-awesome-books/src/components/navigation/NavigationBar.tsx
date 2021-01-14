@@ -8,7 +8,7 @@ export const NavigationBar: React.FunctionComponent<any> = (props) => {
   return (
     <div style={{ width: "100%", top: "0", position: 'relative' }}>
       <Navbar style={{ height: "100%" }} collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Navbar.Brand href="./home">Super Duper Awesome Books</Navbar.Brand>
+        <Navbar.Brand href="../home">Super Duper Awesome Books</Navbar.Brand>
 
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 

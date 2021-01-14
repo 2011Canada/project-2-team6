@@ -55,7 +55,7 @@ const SearchPage = () => {
         <HeaderSearchForm> */}
       {/* <div style={{zIndex: 100}}> */}
       <NavigationBar />
-      <div style={{marginLeft: '43%', marginTop:'2em'}}>
+      <div style={{marginTop:'2em'}}>
         <BookSearchForm
           onSubmitHandler={onSubmitHandler}
           onInputChange={onInputChange}

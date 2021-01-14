@@ -6,7 +6,7 @@ import gitlogo from '../../pictures/GitHub-Mark.png';
 export const Footer: React.FunctionComponent<any> = (props) => {
   return (
 
-    <MDBFooter style={{ position: "absolute", bottom: "0", background: "#808080", width: "100%" }}>
+    <MDBFooter style={{ position: "fixed", bottom: "0", background: "#808080", width: "100%" }}>
 
 
       <div className="footer-copyright text-center">

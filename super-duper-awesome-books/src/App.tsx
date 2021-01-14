@@ -8,7 +8,10 @@ import { MyProfile } from './components/user-profile/MyProfile';
 import { OtherProfile } from './components/user-profile/OtherProfile';
 import ScrollUpButton from "react-scroll-up-button";
 import { Register } from './pages/RegisterPage';
-import LoginPage from './pages/LoginPage';
+import SubjectSelectionBox from './pages/SubjectSelectionPage';
+import LoginControlPage from './pages/LoginControlPage';
+import wood from './pictures/wood.jpg'
+import Footer from './components/footer/Footer';
 
 const NoMatchRoute = () => <div>404 Page Not Found</div>;
 
@@ -18,37 +21,37 @@ function App() {
 
 
   return (
-    <div>
-    <div className="App">
-      </div>
 
-      <Router>
-        
-        
-        <Switch>
-          {/* add main page routing here */}
-          {/* <Route exact path='/home'><NavigationPreLogin/></Route> */}
-                    
-          {/* profile */}
-          
-          <Route path="/myprofile">
-            <MyProfile user={user} />
-          </Route>
-          <Route path="/otherprofile">
-            <OtherProfile user={user} />
-          </Route>
-          <Route path="/home" exact component={HomePage} />
-          <Route path="/login" exact component={LoginPage} />
-          <Route path='/register' exact component={Register} />
-          <Route path="/search-page" exact component={SearchPage} />
-          <Route path="/:bookId" exact component={BookDetailPage} />
-          <Route component={NoMatchRoute} />
-        </Switch>
-      </Router>
-      
-      <ScrollUpButton />
-    
-      
+    <div className="App">
+
+      <div>
+        <Router>
+
+
+          <Switch>
+
+            <Route path="/myprofile">
+              <MyProfile user={user} />
+            </Route>
+            <Route path="/otherprofile">
+              <OtherProfile user={user} />
+            </Route>
+
+            <Route path="/home" exact component={HomePage} />
+            <Route path="/login" exact component={LoginControlPage} />
+
+            <Route path='/register' exact component={Register} />
+            <Route path="/search-page" exact component={SearchPage} />
+            <Route path="/subject-search/:subjectType" exact component={SubjectSelectionBox} />
+            <Route path="/book/:bookId" exact component={BookDetailPage} />
+
+            <Route component={NoMatchRoute} />
+          </Switch>
+        </Router>
+
+        <ScrollUpButton />
+      </div>
+      <Footer />
     </div>
   );
 }

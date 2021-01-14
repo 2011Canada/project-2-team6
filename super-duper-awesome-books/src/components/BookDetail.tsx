@@ -88,13 +88,13 @@ const BookDetail = ({ book }) => {
                 </div>
             </section>
             {/* <div style={{ marginLeft: '50%' }}> */}
-                <div style={{ marginLeft: '50%' }}> 
+                <div style={{ marginLeft: '47%', marginTop: '1%'}}> 
                     <Box component="fieldset" mb={3} borderColor="transparent">
                         <Typography component="legend">Current Rating</Typography>
                         <Rating name="read-only" value={book.volumeInfo.averageRating} readOnly />
                     </Box>
                 </div>
-                <div style={{marginLeft:'47%'}}>
+                <div style={{marginLeft:'47%', marginBottom: '10%'}}>
                     <a href={book.volumeInfo.infoLink} target='_blank'><button style={{ transitionDuration: '0.4s', backgroundColor: '#00A7E1', color: 'white' }}>Check it out on Google Books</button></a>
                 </div>
             {/* </div> */}
