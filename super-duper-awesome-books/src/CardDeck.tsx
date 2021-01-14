@@ -3,14 +3,15 @@ import { Grid } from '@material-ui/core'
 import OutlinedCard from './OutlinedCard'
 import Paper from '@material-ui/core/Paper';
 
-export default class CardDeck extends React.Component {
+export default class CardDeck extends React.Component<any,any> {
 
     render() {
 
 
         return (
             <div>
-                <Grid container justify="center">
+
+                <Grid container justify="center">           
                     <Grid item xs={2}>
                         <OutlinedCard />
                     </Grid>
@@ -23,7 +24,8 @@ export default class CardDeck extends React.Component {
                     <Grid item xs={2}>
                         <OutlinedCard />
                     </Grid>
-                </Grid>
+                    </Grid>
+               
 
             </div>
         )

@@ -22,15 +22,17 @@ const useStyles = makeStyles({
   },
 });
 
-export default function OutlinedCard() {
+export default function OutlinedCard(props: any) {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
+
+  //let url = props.book.imgUrl
 
   return (
     
     <Card style={{backgroundColor: "gray", width: "10rem"}} variant="outlined">
       <CardContent>
-        <img src="http://books.google.com/books/content?id=gW36ngEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"/>
+  <img src="http://books.google.com/books/content?id=_i6bDeoCQzsC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"/>
       </CardContent>
      
       <CardActions style={{display: "flex", justifyContent: "center"}}>
