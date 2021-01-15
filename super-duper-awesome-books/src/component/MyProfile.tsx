@@ -1,7 +1,9 @@
-import {  Button, Card,  CardActions, CardContent, CardMedia, createStyles, Divider, List, ListItem, ListItemText, makeStyles, TextField, Theme, Typography } from '@material-ui/core'
+import {  Button, Card,  CardActions, CardContent, CardMedia, createStyles, Divider, Link, List, ListItem, ListItemText, makeStyles, TextField, Theme, Typography } from '@material-ui/core'
 import axios from 'axios'
+import { resolve } from 'dns';
 import React, { useEffect, useState } from 'react'
-
+import { Redirect } from 'react-router';
+import {Link as RouterLink} from 'react-router-dom'
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -25,6 +27,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
     },
+    media: {
+        height: 140,
+      },
     inline: {
       display: 'inline',
     },
@@ -46,40 +51,42 @@ const useStyles = makeStyles((theme: Theme) =>
 //Requirements: Prop user object with username and userid, should be enclosed in an authentication component
 export const MyProfile: React.FunctionComponent<any> = (props) => {
     const [userDescription, changeDescription] = useState("")
-    const [userReviews, changeReviews] = useState(new Array<any>())
+    const [userBookmarks, changeBookmarks] = useState(new Array<any>())
     const [profileImage, changeProfileImage] = useState("")
     const [offset, changeOffset] = useState(0)
     const [limit, changeLimit] = useState(5)
     const [descriptionEditOpened, changeDescriptionEditingStatus] = useState(false)
 
     //Runs on first load
-    useEffect(() => {
+    useEffect( () => {
         //TODO: Replace example content with content from db, fetched using the user's ID as given by props
 
 
         let exampleDescription = "I am the greatest person in the entirety of the universe."
         changeDescription(exampleDescription)
 
-
+        /** 
         let exampleReviews: Object[] = [
             {
                 bookId: 1,
-                reviewId: 1,
-                reviewTitle: "Absolutely terrible",
-                reviewDescription: "This book made my life worse than ever before after reading the first 2 pages, thanks.",
-                rating: 0
+                bookTitle: "Harry Potter and the Broken Washing Machine",
+                bookImage: "",
             },
             {
                 bookId: 2,
-                reviewId: 2,
-                reviewTitle: "Greatest book ever written in the history of the universe.",
-                reviewDescription: "You must buy it and read it. Also, buy one for your parents, your siblings, your children, your dog. They will love it and forever love you for buying it for them, I promise you.",
-                rating: 10
+                bookTitle: "The Lord of the Ringolos",
+                bookImage: "",
             },
-
+            
         ]
+        */
+       axios.get("http://localhost:8080/bookmarks/"+props.user.userid ).then( res => {
+        let data:Array<any> = res.data;
+        changeBookmarks(data)
+       }
 
-        changeReviews(exampleReviews)
+       )
+
 
 
         //TO DO: fetch pfp from db 
@@ -97,7 +104,7 @@ export const MyProfile: React.FunctionComponent<any> = (props) => {
     }
 
     let showNextReviews = () => {
-        if (limit <= userReviews.length) {
+        if (limit <= userBookmarks.length) {
             changeOffset(limit)
             changeLimit(limit + 5)
         }
@@ -128,7 +135,7 @@ export const MyProfile: React.FunctionComponent<any> = (props) => {
     let enterKeyPress = (e:React.KeyboardEvent) => {
         if(e.key == 'Enter' && descriptionEditOpened){
            //TO DO: post request to change description
-           
+            
             toggleEditDescription()
            
         }
@@ -189,16 +196,22 @@ export const MyProfile: React.FunctionComponent<any> = (props) => {
 
             <List className={classes.root_review}>
 
-                {userReviews.slice(limit - 5, limit).map((review, i) => {
+                {userBookmarks.slice(limit - 5, limit).map((bookmark, i) => {
                     return (
                         
                     <div className= "review-element">
-                
+                    <Link underline='none' component={RouterLink} to={"/books/"+bookmark.bookId}>
+                    <CardMedia 
+                        className={classes.media}
+                            image={profileImage}//placeholder
+                         title="book image"
+                        />
+                    </Link>
                     <ListItem alignItems="flex-start">
-                
+                        
                         <ListItemText
                         //TODO: Add links to the books
-                            primary={review.reviewTitle}
+                            primary={bookmark.bookTitle}
                             secondary={
                                 <React.Fragment>
                                     <Typography
@@ -206,10 +219,12 @@ export const MyProfile: React.FunctionComponent<any> = (props) => {
                                         variant="body2"
                                         className={classes.inline}
                                         color="textPrimary"
+                                        
                                     >
-                                        {"Rating: "+ review.rating}
+                                        {"Image goes here: "+ bookmark.bookImage}
+                                        
                                     </Typography>
-                                    {" — "+review.reviewDescription}
+                                    {" — "+bookmark.bookDescription}
                                 </React.Fragment>
                             }
                         />

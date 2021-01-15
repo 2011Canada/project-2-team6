@@ -5,6 +5,7 @@ import './App.css';
 import { MyProfile } from './component/MyProfile';
 import { OtherProfile } from './component/OtherProfile';
 import { ClubRegistration } from './component/ClubRegistration';
+import { Club } from './component/Club';
 
 
 function App() {
@@ -21,6 +22,9 @@ function App() {
           </Route>
           <Route path="/clubregistration">
             <ClubRegistration/>
+          </Route>
+          <Route path="/club">
+            <Club clubId={1}/>
           </Route>
         </Router>
     </div>
