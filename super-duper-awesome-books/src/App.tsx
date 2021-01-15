@@ -4,7 +4,7 @@ import SearchPage from './pages/SearchPage';
 import BookDetailPage from './pages/BookDetailPage';
 import HomePage from './pages/HomePage';
 import { useState } from 'react';
-import { MyProfile } from './components/user-profile/MyProfile';
+import MyProfile  from './components/user-profile/MyProfile';
 import { OtherProfile } from './components/user-profile/OtherProfile';
 import ScrollUpButton from "react-scroll-up-button";
 import { Register } from './pages/RegisterPage';

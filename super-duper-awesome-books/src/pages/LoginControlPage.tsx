@@ -1,6 +1,6 @@
 import React from 'react';
 import Login from '../components/login/Login';
-import { MyProfile } from '../components/user-profile/MyProfile';
+import MyProfile from '../components/user-profile/MyProfile';
 
 
 
