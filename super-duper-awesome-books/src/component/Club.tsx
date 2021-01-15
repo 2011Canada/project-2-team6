@@ -1,10 +1,20 @@
-import { Button, Card, CardContent, CardMedia, createStyles, Divider, Drawer, GridList, GridListTile, GridListTileBar, IconButton, Link, List, ListItem, ListItemText, ListSubheader, makeStyles, TextField, Theme, Typography, useRadioGroup } from '@material-ui/core'
+import { Button, Card, CardContent, CardMedia, createStyles, Divider, Drawer, GridList, GridListTile, GridListTileBar, IconButton, Link, List, ListItem, ListItemText, ListSubheader, makeStyles, TextField, Theme, Tooltip, Typography, useRadioGroup } from '@material-ui/core'
 import axios from 'axios';
+import DeleteIcon from '@material-ui/icons/Delete';
 import React, { useEffect, useState } from 'react'
 import {Link as RouterLink} from 'react-router-dom'
 
 interface IClub{
-    clubid:number
+    clubId:number
+    userId:number
+}
+
+interface IUser {
+    "username": String,
+    "userId": Number,
+    "firstName": String,
+    "lastName": String,
+    "email": String
 }
 
 const drawerWidth = 240;
@@ -22,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
       gridList: {
           
-        width: 500,
+        width: "400vw",
         height: 400,
       },
     root_review: {
@@ -39,8 +49,16 @@ const useStyles = makeStyles((theme: Theme) =>
 
     },
     media: {
-        height: "35vh",
-        width: "25vh"
+        height: "50vh",
+        width: "25vh",
+        "margin-top": "50vh",
+        "z-index": "-5"
+      },
+      bookElement: {
+        
+        height: "50vh",
+        width: "25vh",
+        "margin-top": "30vh"
       },
     inline: {
       display: 'inline',
@@ -61,6 +79,9 @@ const useStyles = makeStyles((theme: Theme) =>
     membersList: {
 
     },
+    icon: {
+        "z-index": "5000000"
+    },
     toolbar: theme.mixins.toolbar,
     drawer: {
         width: drawerWidth,
@@ -72,7 +93,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export const Club:React.FunctionComponent<any> = (props) => {
+export const Club:React.FunctionComponent<IClub> = (props) => {
     const [clubName, changeClubName] = useState("")
     const [clubDescription, changeClubDescription] = useState("")
     const [clubBooks, changeClubBooks] = useState(new Array<any>())
@@ -81,6 +102,10 @@ export const Club:React.FunctionComponent<any> = (props) => {
     const [profileImage, changeProfileImage] = useState("")
     const [bookOffset, changeOffset] = useState(0)
     const [bookLimit, changeLimit] = useState(4)
+    const [userIsMember, changeMembership] = useState(false)
+    const [hasUser, changeHasUser] = useState(false)
+    const [userComment, changeUserComment] = useState("")
+    const [currentBook, changeBook] = useState("")
     
     
     useEffect(() => {
@@ -90,7 +115,27 @@ export const Club:React.FunctionComponent<any> = (props) => {
         let clubMembers
         let clubComments
 
+
         async function fetchClubData() {
+
+
+            if(props.userId) {
+                let user = await axios.get(`http://localhost:8080/users/${props.userId}`).then((res)=> {return res.data})
+                if(user) {
+                    changeHasUser(true);
+
+                    let members:Array<any> = await axios.get(`http://localhost:8080/clubs/${props.clubId}/members`).then((res)=> {return res.data})
+                    console.log(typeof members)
+                    members.forEach((member) => {
+                        if(member.userId === props.userId) {
+                            changeMembership(true)
+                        }
+                    } )
+
+                }
+            }
+
+
             let {clubName, clubDescription} = await axios.get("http://localhost:8080/clubs/"+props.clubId).then((res) => {
                 return res.data
             })
@@ -117,7 +162,7 @@ export const Club:React.FunctionComponent<any> = (props) => {
             changeMembers(clubMembers)
             changeComments(clubComments)
         }
-        
+      
         fetchClubData()
         
         
@@ -160,7 +205,41 @@ export const Club:React.FunctionComponent<any> = (props) => {
 
 
     }
+    let handleChangeUserComment = (event: React.ChangeEvent<HTMLInputElement>) => {
+        changeUserComment(event.target.value)
+    }
 
+    let submitUserComment = () => {
+        let commentData = {
+            clubId: props.clubId,
+            comment: userComment,
+            userId: props.userId
+        }
+        axios.post(`http://localhost:8080/clubs/${props.clubId}/comments`, commentData)
+        changeUserComment("")
+    }
+
+    let submitJoinClub = () => {
+        let joinData = {userId: props.userId}
+        axios.post(`http://localhost:8080/clubs/${props.clubId}/members`, joinData)
+    }
+
+    let submitLeaveClub = () => {
+        axios.delete(`http://localhost:8080/clubs/${props.clubId}/members`, {data:{userId: props.userId}})
+    }
+
+    let removeBookFromClub = (bookId:String) => {
+        console.log(bookId)
+        axios.delete(`http://localhost:8080/clubs/${props.clubId}/books`,  {data: bookId})
+    }
+
+    let handleChangeBook = (event: React.ChangeEvent<HTMLInputElement>) => {
+        changeBook(event.target.value)
+    }
+    let submitBook = () => {
+        
+        axios.post(`http://localhost:8080/clubs/${props.clubId}/books`, {bookId: currentBook})
+    }
 
     return(
         
@@ -184,7 +263,8 @@ export const Club:React.FunctionComponent<any> = (props) => {
                                     { clubDescription}
                                 </Typography>
                             </CardContent>
-
+                            {(hasUser&&!userIsMember) && <Button variant="contained" onClick = {submitJoinClub} color="primary">Join Club</Button>}
+                            {(hasUser&&userIsMember) && <Button variant="contained" onClick= {submitLeaveClub} color="secondary">Leave Club</Button>}
                     </Card>
                 </div>
             
@@ -222,15 +302,30 @@ export const Club:React.FunctionComponent<any> = (props) => {
                     <ListSubheader component="div">Books</ListSubheader>
                 </GridListTile>
                 {clubBooks.slice(bookLimit - 4, bookLimit).map((book) => (
-
-                    <GridListTile key={book.bookImg}>
-                    <img src={book.bookImage} alt={book.bookTitle} />
-                    <GridListTileBar
-                        title={book.bookTitle}
-                        subtitle={<span>by: {book.bookAuthor}</span>}
-                    />
-                    </GridListTile>
-                 
+                    
+                    <>
+                        <GridListTile key={book.bookImg}>
+                        <img src={book.bookImage} alt={book.bookTitle}/>
+                        
+                        <GridListTileBar
+                            title={book.bookTitle}
+                            subtitle={<span>by: {book.bookAuthor}</span>}
+                            
+                        />
+                        </GridListTile>
+                        {(hasUser&&userIsMember) && 
+                        
+                    
+                        <div className={classes.icon}>
+                                <Tooltip title="Delete" >
+                                <IconButton aria-label="delete" >
+                                <DeleteIcon onClick={() => {removeBookFromClub(book.bookId)}}/>
+                                </IconButton>
+                                </Tooltip>
+                            </div>
+                            }
+                        </>
+                        
                     
                 ))}
             </GridList>
@@ -242,6 +337,30 @@ export const Club:React.FunctionComponent<any> = (props) => {
         <div><button type="button" onClick={() => showPreviousBooks()}>Previous 4</button></div>
         <div><button type="button" onClick={() => showNextBooks()}>Next 4</button></div>
         
+
+        <div>
+
+            {(hasUser&&userIsMember) && 
+                <React.Fragment>
+
+                    <TextField
+                        id="outlined-multiline-flexible"
+                        multiline
+                        label="Please enter book-id"
+                        rowsMax={4}
+                        value={currentBook}
+                        onChange={handleChangeBook}
+                        variant="outlined"
+                    />
+                    <div>
+                        <Button variant="contained" onClick={submitBook}>Submit Book</Button>
+                    </div>
+                </React.Fragment>
+            }
+
+
+        </div>
+
         <div>
         <List className={classes.root}>
             
@@ -274,7 +393,26 @@ export const Club:React.FunctionComponent<any> = (props) => {
     </List>
 
         </div>
+        <div>
 
+            {hasUser && 
+                <React.Fragment>
+                    <TextField
+                        id="outlined-multiline-flexible"
+                        multiline
+                        rowsMax={4}
+                        value={userComment}
+                        onChange={handleChangeUserComment}
+                        variant="outlined"
+                    />
+                    <div>
+                    <Button variant="contained" onClick={submitUserComment}>Submit Comment</Button>
+                    </div>
+                </React.Fragment>
+            }
+
+
+        </div>
 
 
 

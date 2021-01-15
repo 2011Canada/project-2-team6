@@ -1,4 +1,5 @@
 import { Button, createStyles, makeStyles, TextField, Theme } from '@material-ui/core';
+import axios from 'axios';
 import React, { useState } from 'react'
 
 
@@ -21,6 +22,8 @@ export const ClubRegistration:React.FunctionComponent<any> = (props) => {
     const classes = useStyles();
     const [clubName, changeClubName] = useState("")
     const [clubDescription, changeClubDescription] = useState("")
+    const [clubImage, changeClubImage] = useState({})
+    let fileInput:React.RefObject<HTMLInputElement> = React.createRef();
 
     let handleClubNameChange = (event: React.ChangeEvent<HTMLInputElement>)  => {
         changeClubName(event.target.value)
@@ -29,16 +32,35 @@ export const ClubRegistration:React.FunctionComponent<any> = (props) => {
     let handleClubDescriptionChange = (event: React.ChangeEvent<HTMLInputElement>)  => {
         changeClubDescription(event.target.value)
     }
+
+    let onFileUpload = e => {
+        fileInput.current.click();
+        const file:Blob = e.target.files[0];
+        var reader = new FileReader();
+        var fileByteArray = [];
+        reader.readAsArrayBuffer(file);
+        reader.onloadend = function (evt) {
+            if (evt && evt.target.readyState == FileReader.DONE) {
+            var arrayBuffer:any = evt.target.result,
+            array = new Uint8Array(arrayBuffer);
+                for (var i = 0; i < array.length; i++) {
+                    fileByteArray.push(array[i]);
+                }
+            }
+        }       
+        changeClubImage(fileByteArray) 
+    }
+    
     let handleSubmit = () => {
         let clubData = {
             clubName,
-            clubDescription
+            clubDescription,
+            clubImage
         }
         //post request to create a club using clubData
 
-
-
-
+        axios.post("http://localhost:8080/clubs", clubData);
+        
     }
 
 
@@ -58,9 +80,9 @@ export const ClubRegistration:React.FunctionComponent<any> = (props) => {
             />
             </div>
             <div>
-            <Button className= {classes.buttons} variant="contained" component="label">
+            <Button className= {classes.buttons} variant="contained"  component="label">
                 Upload Club Profile Image
-            <input type="file" accept='image/*' hidden />
+            <input type="file" accept='image/*' ref={fileInput} onChange={onFileUpload} hidden />
             </Button>
             </div>
             <div>

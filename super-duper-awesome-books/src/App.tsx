@@ -24,7 +24,7 @@ function App() {
             <ClubRegistration/>
           </Route>
           <Route path="/club">
-            <Club clubId={1}/>
+            <Club clubId={1} userId={1}/>
           </Route>
         </Router>
     </div>
