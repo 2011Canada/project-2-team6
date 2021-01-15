@@ -146,8 +146,8 @@ export const Club:React.FunctionComponent<any> = (props) => {
 
     let showPreviousBooks = () => {
         if (bookLimit - 4 > 0) {
-            changeOffset(bookLimit - 5)
-            changeLimit(bookLimit - 5)
+            changeOffset(bookLimit - 4)
+            changeLimit(bookLimit - 4)
         }
 
     }
