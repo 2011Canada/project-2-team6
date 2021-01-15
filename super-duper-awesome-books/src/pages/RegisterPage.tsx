@@ -63,9 +63,9 @@ export const Register: React.FunctionComponent<IRegister> = (props) => {
 
 
     return (
-        <div style={{backgroundImage: `url(${wood})`, backgroundSize: 'cover', height: '100vh'}}>
+        <div style={{backgroundImage: `url(${wood})`, backgroundSize: 'cover', height: '100vh', paddingTop:'1em'}}>
           
-            <div style={{ marginLeft: '40%', marginTop: '8%'}}>
+            <div style={{ marginLeft: '40%', marginTop: '10%'}}>
                 <LoginBorder>
                     <div style={{ marginTop: '5%' }}>
                         <h6 style={{fontSize: '200%', color: 'grey'}}>Register</h6>

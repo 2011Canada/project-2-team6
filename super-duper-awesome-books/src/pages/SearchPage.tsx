@@ -66,10 +66,10 @@ const SearchPage = () => {
       {/* </HeaderSearchForm>
       </HeaderContainer> */}
 
-      {/* <Container>
+      <Container>
         <ScrollUpButton />
         <BooksList books={books} />
-      </Container> */}
+      </Container>
 
     </>
   );

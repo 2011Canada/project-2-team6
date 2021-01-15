@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "@emotion/styled";
-import ScrollUpButton from "react-scroll-up-button";
-import { BrowserRouter as Router, Route, Switch, Link, useParams } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
-import { Button } from "@material-ui/core";
-import NavigationBar from "../components/navigation/NavigationBar";
 import { Container } from "../components/SharedBackGround";
 import BooksList from "../components/BookList";
 import ErrorText from "../components/ErrorText";

@@ -1,12 +1,11 @@
 import React from 'react';
 import { Navbar, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Link } from "react-router-dom";
 import { User } from '../Model/User';
 
 export const NavigationBar: React.FunctionComponent<any> = (props) => {
   return (
-    <div style={{ width: "100%", top: "0", position: 'relative' }}>
+    <div style={{ width: "100%"}}>
       <Navbar style={{ height: "100%" }} collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Navbar.Brand href="../home">Super Duper Awesome Books</Navbar.Brand>
 
@@ -15,13 +14,12 @@ export const NavigationBar: React.FunctionComponent<any> = (props) => {
         <Navbar.Collapse id="responsive-navbar-nav">
 
           <div style={{ position: "absolute", right: "0", }}>
-            <Link to={`/search-page`} style={{ paddingRight: '5px' }}>
-              <Button href="/login" variant="outline-secondary" size="lg">Go To Search Page</Button>
-            </Link>
-            <Button href="/login" variant="outline-secondary" size="lg">
+
+            <Button href="/search-page" variant="outline-secondary" size="lg" style={{ marginRight: '10px' }}>Go To Search Page</Button>
+            <Button href="/login" variant="outline-secondary" size="lg" style={{ marginRight: '10px' }}>
               Sign in
-          </Button>{' '}
-            <Button href="/register" variant="outline-secondary" size="lg">
+          </Button>
+            <Button href="/register" variant="outline-secondary" size="lg" style={{ marginRight: '10px' }}>
               Register
           </Button>
           </div>
@@ -34,19 +32,21 @@ export const NavigationBar: React.FunctionComponent<any> = (props) => {
 export const NavigationPostLogin: React.FunctionComponent<any> = (props) => {
 
   return (
-    <div style={{ width: "100%", top: "0", position: 'relative' }}>
-      <Navbar style={{ height: "2.2em" }} collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Navbar.Brand href="/">Super Duper Awesome Books</Navbar.Brand>
+    <div style={{ width: "100%"}}>
+      <Navbar style={{ height: "100%" }} collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Navbar.Brand href="../home">Super Duper Awesome Books</Navbar.Brand>
 
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
         <Navbar.Collapse id="responsive-navbar-nav">
 
           <div style={{ position: "absolute", right: "0", }}>
-              <Button href="/myprofile/:userid" variant="outline-secondary" size="lg" style={{marginRight:'10px'}}>
-                profile
+            <Button href="/search-page" variant="outline-secondary" size="lg" style={{ marginRight: '10px' }}>Go To Search Page</Button>
+
+            <Button href="/myprofile/:userid" variant="outline-secondary" size="lg" style={{ marginRight: '10px' }}>
+              profile
             </Button>
-            <Button variant="outline-secondary" size="lg" style={{marginRight:'10px'}}>
+            <Button variant="outline-secondary" size="lg" style={{ marginRight: '10px' }}>
               Sign out
           </Button>
 
@@ -68,8 +68,8 @@ interface ILoginProps {
 
 export const DisplayNav: React.FunctionComponent<ILoginProps> = (props) => {
 
-  console.log(props.currentUser)
-  console.log("diplay Here")
+  // console.log(props.currentUser)
+
   return (
     (props.currentUser) ?
       <NavigationPostLogin />

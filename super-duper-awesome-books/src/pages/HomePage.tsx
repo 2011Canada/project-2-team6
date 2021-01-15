@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import { Navbar, Button } from 'react-bootstrap';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import banner from '../pictures/banner.png';
 import Footer from '../components/footer/Footer';
-import { BrowserRouter as Router, Route, Switch, useParams, Link } from "react-router-dom";
+import { BrowserRouter as Link } from "react-router-dom";
 import SubjectButtonComponent from '../components/SubjectButtonComponent';
 import { createStyles, makeStyles, Paper } from '@material-ui/core';
 import PopularBooks from '../components/Carousel/PopularBooks';
@@ -37,12 +36,6 @@ export const HomePage: React.FunctionComponent<any> = (props) => {
                 <img style={{ width: "100%" }} src={banner} alt="Logo" />
 
             </div>
-
-            {/* <div>
-                <PopularBooks/>
-            </div> */}
-
-
 
             <div className={classes.root}>
                 <div>

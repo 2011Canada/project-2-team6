@@ -1,5 +1,5 @@
 import './App.css';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SearchPage from './pages/SearchPage';
 import BookDetailPage from './pages/BookDetailPage';
@@ -18,24 +18,22 @@ const NoMatchRoute = () => <div>404 Page Not Found</div>;
 export const UserContext = React.createContext<any>(undefined)
 
 function App() {
-  
+
   const [User, changeUser] = useState<User>()
   // const [user, changeUser] = useState({ userid: 1, username: "TheGreatestUsernameEver", firstName: "John", lastName: "Smith" })
   console.log(User)
 
   return (
-    
-    <div className="App">
 
-      <div>
+    <div className="App">
+      <UserContext.Provider value={User}>
+
 
         <Router>
-        <DisplayNav currentUser={User}/>
+          <DisplayNav currentUser={User} />
 
           <Switch>
-            <Route  path="/test">
-          <DisplayNav currentUser={User}/>
-            </Route>
+
             <Route path="/myprofile">
               <MyProfile user={User} />
             </Route>
@@ -45,11 +43,11 @@ function App() {
 
             <Route path="/home" exact component={HomePage} />
             <Route path="/login">
-                <LoginForm currentUser={User} updateCurrentUser={changeUser} />
-              </Route>
+              <LoginForm currentUser={User} updateCurrentUser={changeUser} />
+            </Route>
 
             <Route path='/register' exact component={Register} />
-          
+
             <Route path="/search-page" exact component={SearchPage} />
             <Route path="/subject-search/:subjectType" exact component={SubjectSelectionBox} />
             <Route path="/book/:bookId" exact component={BookDetailPage} />
@@ -57,11 +55,13 @@ function App() {
             <Route component={NoMatchRoute} />
           </Switch>
         </Router>
-        <ScrollUpButton />
-      </div>
+      </UserContext.Provider>
+      <ScrollUpButton />
+
       <Footer />
-      
+
     </div>
+
 
   );
 
