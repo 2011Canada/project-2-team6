@@ -12,13 +12,14 @@ import SubjectSelectionBox from './pages/SubjectSelectionPage';
 import LoginControlPage from './pages/LoginControlPage';
 import wood from './pictures/wood.jpg'
 import Footer from './components/footer/Footer';
+import PopularBooks from './components/Carousel/PopularBooks';
 
 const NoMatchRoute = () => <div>404 Page Not Found</div>;
 
 function App() {
 
   const [user, changeUser] = useState({ userid: 1, username: "TheGreatestUsernameEver", firstName: "John", lastName: "Smith" })
-
+  // const [user, changeUser] = useState<User>()
 
   return (
 
@@ -39,6 +40,8 @@ function App() {
 
             <Route path="/home" exact component={HomePage} />
             <Route path="/login" exact component={LoginControlPage} />
+
+            {/* <Route path="/test" exact component={PopularBooks} /> */}
 
             <Route path='/register' exact component={Register} />
             <Route path="/search-page" exact component={SearchPage} />

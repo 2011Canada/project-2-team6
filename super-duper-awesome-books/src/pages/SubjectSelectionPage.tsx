@@ -28,9 +28,6 @@ export const SubjectSelectionBox = ({ match }) => {
     const [books, setBooks] = useState({ items: [] });
     const [error, setError] = useState(false);
 
-
-    const API_BASE_URL = `https://www.googleapis.com/books/v1/volumes`;
-
     useEffect(() => {
         const API_BASE_URL = `https://www.googleapis.com/books/v1/volumes`;
         const fetchBooks = async () => {
@@ -38,6 +35,7 @@ export const SubjectSelectionBox = ({ match }) => {
             try {
                 const result = await axios.get(`${API_BASE_URL}?q=subject:${subjectType}&maxResults=40&orderBy=newest`);
                 setBooks(result.data);
+                toast.info("Loading!")
             } catch (error) {
                 setError(true);
                 toast.error("Something Went Wrong!")

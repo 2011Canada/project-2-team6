@@ -1,6 +1,5 @@
 import React from 'react';
 import Login from '../components/login/Login';
-import { MyProfile } from '../components/user-profile/MyProfile';
 
 
 
@@ -38,11 +37,11 @@ updateCurrentUser(user: any){
     render(){
 if (!this.state.loggedIn){
     return <Login updateLoginStatus={this.updateLoginStatus} updateCurrentUser={this.updateCurrentUser}/> 
-// }else{
-    // return <Login updateLoginStatus={this.updateLoginStatus} updateCurrentUser={this.updateCurrentUser}/> 
+}else{
+    return <Login updateLoginStatus={this.updateLoginStatus} updateCurrentUser={this.updateCurrentUser}/> 
+}
+    }}
+// else if (this.state.loggedIn) {
+//     return <MyProfile updateLoginStatus={this.updateLoginStatus} updateCurrentUser={this.updateCurrentUser} currentUser={this.state.currentUser}/>
+// }}
 // }
-}
-else if (this.state.loggedIn) {
-    return <MyProfile updateLoginStatus={this.updateLoginStatus} updateCurrentUser={this.updateCurrentUser} currentUser={this.state.currentUser}/>
-}}
-}

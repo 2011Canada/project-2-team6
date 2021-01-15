@@ -2,6 +2,7 @@ import { Button, Card, CardActions, CardContent, CardMedia, createStyles, Divide
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import ScrollUpButton from "react-scroll-up-button";
+import NavigationBar from '../navigation/NavigationBar';
 import Bookshelf from './Bookshelf.jpg'
 
 
@@ -23,8 +24,6 @@ const useStyles = makeStyles((theme: Theme) =>
             width: '100%',
             maxWidth: '100ch',
             backgroundColor: theme.palette.background.paper,
-
-
         },
         inline: {
             display: 'inline',
@@ -139,52 +138,54 @@ export const MyProfile: React.FunctionComponent<any> = (props) => {
     const classes = useStyles();
 
     return (
+        <div>
+            <NavigationBar />
+            <div className="content">
+                
 
-        <div className="content">
+                <div className="dashboard" style={{ marginTop: '6%' }}>
+                    <Card className={classes.root}>
 
-            <div className="dashboard" style={{ marginTop: '6%' }}>
-                <Card className={classes.root}>
-
-                    <CardMedia
-                        component="img"
-                        alt={props.user.username}
-                        height="340"
-                        image={profileImage}
-                        title={props.user.username}
-                    />
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                            {props.user.username}
-                        </Typography>
-                        {!descriptionEditOpened &&
-
-                            <Typography variant="body2" color="textSecondary" component="p">
-                                {userDescription}
+                        <CardMedia
+                            component="img"
+                            alt={props.user.username}
+                            height="340"
+                            image={profileImage}
+                            title={props.user.username}
+                        />
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="h2">
+                                {props.user.username}
                             </Typography>
-                        }
-                        {descriptionEditOpened &&
-                            <TextField
-                                id="outlined-multiline-flexible"
-                                multiline
-                                rowsMax={4}
-                                value={userDescription}
-                                onKeyPress={enterKeyPress}
-                                onChange={handleDescriptionChange}
-                                variant="outlined"
-                            />
-                        }
+                            {!descriptionEditOpened &&
 
-                        <Button className={classes.editButton} onClick={toggleEditDescription}>Edit Description</Button>
-                    </CardContent>
+                                <Typography variant="body2" color="textSecondary" component="p">
+                                    {userDescription}
+                                </Typography>
+                            }
+                            {descriptionEditOpened &&
+                                <TextField
+                                    id="outlined-multiline-flexible"
+                                    multiline
+                                    rowsMax={4}
+                                    value={userDescription}
+                                    onKeyPress={enterKeyPress}
+                                    onChange={handleDescriptionChange}
+                                    variant="outlined"
+                                />
+                            }
 
-                    <CardActions>
+                            <Button className={classes.editButton} onClick={toggleEditDescription}>Edit Description</Button>
+                        </CardContent>
 
-                    </CardActions>
-                </Card>
+                        <CardActions>
 
-            </div>
+                        </CardActions>
+                    </Card>
 
-            {/* <div className={classes.review_container}>
+                </div>
+
+                {/* <div className={classes.review_container}>
 
                 <List className={classes.root_review}>
 
@@ -219,14 +220,15 @@ export const MyProfile: React.FunctionComponent<any> = (props) => {
                         )
                     }) */}
 
-            {/* }</List> */}
-            {/* <div><button type="button" onClick={() => showPreviousReviews()}>Previous 10</button></div>
+                {/* }</List> */}
+                {/* <div><button type="button" onClick={() => showPreviousReviews()}>Previous 10</button></div>
                 <div><button type="button" onClick={() => showNextReviews()}>Next 10</button></div> */}
 
 
-            {/* </div> */}
-            <div style={{ backgroundImage: `url(${Bookshelf})`, marginTop: '2%', marginLeft:'1%', marginRight:'1%'}}>
-                <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+                {/* </div> */}
+                <div style={{ backgroundImage: `url(${Bookshelf})`, marginTop: '2%', marginLeft: '1%', marginRight: '1%' }}>
+                    <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+                </div>
             </div>
         </div>
 

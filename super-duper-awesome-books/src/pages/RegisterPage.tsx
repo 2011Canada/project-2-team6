@@ -3,6 +3,7 @@ import { Button, Grid, TextField } from '@material-ui/core'
 import axios from 'axios';
 import NavigationBar from '../components/navigation/NavigationBar';
 import LoginBorder from '../components/fancy-border/LoginBorder';
+import wood from '../pictures/wood.jpg'
 
 interface IRegister {
     username: string,
@@ -62,9 +63,9 @@ export const Register: React.FunctionComponent<IRegister> = (props) => {
 
 
     return (
-        <div>
+        <div style={{backgroundImage: `url(${wood})`, backgroundSize: 'cover', height: '100vh'}}>
             <NavigationBar />
-            <div style={{ marginLeft: '40%', marginTop: '8%' }}>
+            <div style={{ marginLeft: '40%', marginTop: '8%'}}>
                 <LoginBorder>
                     <div style={{ marginTop: '5%' }}>
                         <h6 style={{fontSize: '200%', color: 'grey'}}>Register</h6>

@@ -7,6 +7,7 @@ import Footer from '../components/footer/Footer';
 import { BrowserRouter as Router, Route, Switch, useParams, Link } from "react-router-dom";
 import SubjectButtonComponent from '../components/SubjectButtonComponent';
 import { createStyles, makeStyles, Paper } from '@material-ui/core';
+import PopularBooks from '../components/Carousel/PopularBooks';
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -14,13 +15,12 @@ const useStyles = makeStyles((theme) =>
             display: 'flex',
             // flexWrap: 'wrap',
             justifyContent: 'center',
-            marginTop: '12%',
+            marginTop: '5%',
             '& > *': {
                 // margin: theme.spacing(10),
                 width: theme.spacing(50),
                 height: theme.spacing(40),
             },
-
         },
     }),
 );
@@ -44,7 +44,7 @@ export const HomePage: React.FunctionComponent<any> = (props) => {
 
                         <div style={{ position: "absolute", right: "0", }}>
                             <Link to={`/search-page`} style={{ paddingRight: '5px' }}>
-                                <Button href="/login" variant="outline-secondary" size="lg">Go To Search Page</Button>
+                                <Button href="/login" variant="outline-secondary" size="lg">Search Books</Button>
                             </Link>
                             <Button href="/login" variant="outline-secondary" size="lg">
                                 Sign in
@@ -58,17 +58,27 @@ export const HomePage: React.FunctionComponent<any> = (props) => {
                 <img style={{ width: "100%" }} src={banner} alt="Logo" />
 
             </div>
+
+            {/* <div>
+                <PopularBooks/>
+            </div> */}
+
+
+
             <div className={classes.root}>
-                <Paper elevation={15} style={{backgroundColor: "#ffd699" }}>
+                <div>
+                    <PopularBooks />
+                </div>
+                <Paper elevation={15} style={{ backgroundColor: "#ffd699" }}>
                     <div style={{ marginLeft: '1em', marginTop: '1em' }}>
                         <h6 style={{ fontSize: '158%' }}>
                             Check Out The Newest Books!!!!
                         </h6>
                     </div>
-                    <div style={{marginLeft:'1em', marginTop: '2em'}}>
+                    <div style={{ marginLeft: '1em', marginTop: '2em' }}>
                         <div>
-                            <Link to={`/subject-search/fiction`} style={{ textDecoration: 'none' }}>
-                                <SubjectButtonComponent text="fiction" />
+                            <Link to={`/subject-search/manga`} style={{ textDecoration: 'none' }}>
+                                <SubjectButtonComponent text="Manga" />
                             </Link>
 
                             <Link to={`/subject-search/science-fiction`} style={{ textDecoration: 'none' }}>

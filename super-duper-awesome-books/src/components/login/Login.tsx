@@ -5,7 +5,7 @@ import axios from 'axios';
 import LoginBorder from '../fancy-border/LoginBorder';
 import NavigationBar from '../navigation/NavigationBar';
 import FooterPage from '../footer/Footer';
-import wood from '../images/wood.jpg'
+import wood from '../../pictures/wood.jpg';
 
 interface IUserState {
     userName: String;
@@ -65,7 +65,7 @@ export default class LoginPage extends React.Component<any, IUserState> {
     render() {
 
         return (
-            <div>
+            <div style={{backgroundImage: `url(${wood})`, backgroundSize: 'cover', height: '100vh'}}>
                 <NavigationBar />
                 <div style={{marginLeft:'40%', marginTop:'8%'}}>
                     <LoginBorder>

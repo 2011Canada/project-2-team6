@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { SyntheticEvent, useState } from 'react'
 import { Box, Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Fade, Grid, makeStyles, Menu, MenuItem, Typography } from '@material-ui/core';
 import { bookAuthors } from '../utils/authorLogic';
 import Rating from '@material-ui/lab/Rating';
 import { Link } from "react-router-dom";
-import HoverRating from './book-rating/FeedbackRating';
+import { Bookmark } from '@material-ui/icons';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
 const useStyles = makeStyles({
     root: {
@@ -16,6 +18,9 @@ const useStyles = makeStyles({
 
 const BookDetail = ({ book }) => {
 
+    const [bookmark, setBookmark] = useState(null);
+    const [error, setError] = useState(false);
+
     const classes = useStyles();
 
     const createDescMarkup = (description) => { return { __html: description }; };
@@ -23,8 +28,8 @@ const BookDetail = ({ book }) => {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
 
-    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
+    const handleClick = () => {
+        Bookmark(book);
     };
 
     const handleClose = () => {
@@ -32,6 +37,27 @@ const BookDetail = ({ book }) => {
     };
 
 
+    const handleSubmit = async (e: SyntheticEvent) => {
+        e.preventDefault();
+
+        const newBookMark = {
+            bookId: book.id,
+            // userId: , 
+            bookImage: `http://books.google.com/books/content?id=${book.id}&printsec=frontcover&img=1&zoom=1&source=gbs_api`,
+            bookTitle: book.volumeInfo.title
+        }
+
+        console.log(newBookMark)
+        try{
+            const res = axios.post(`http://localhost:8080/bookmarks`, newBookMark)
+            toast.success("Bookmarked!")
+            setBookmark(res)
+        } catch(error) {
+            setError(true);
+            toast.error("Something Went Wrong!")
+        };
+    }
+    
     const [value, setValue] = React.useState<number | null>(2);
 
     return (
