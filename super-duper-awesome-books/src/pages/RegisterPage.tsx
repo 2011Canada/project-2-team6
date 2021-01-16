@@ -1,9 +1,9 @@
 import React, { SyntheticEvent, useState } from 'react';
 import { Button, Grid, TextField } from '@material-ui/core'
 import axios from 'axios';
-import NavigationBar from '../components/navigation/NavigationBar';
-import LoginBorder from '../components/fancy-border/LoginBorder';
 import wood from '../pictures/wood.jpg'
+import RegisterBorder from '../components/fancy-border/RegisterBorder';
+import { toast } from 'react-toastify';
 
 interface IRegister {
     username: string,
@@ -22,6 +22,8 @@ export const Register: React.FunctionComponent<IRegister> = (props) => {
     const [firstname, changeFirstname] = useState("")
     const [lastname, changeLastname] = useState("")
     const [email, changeEmail] = useState("")
+
+    const [error, setError] = useState(false);
 
 
 
@@ -53,19 +55,24 @@ export const Register: React.FunctionComponent<IRegister> = (props) => {
         }
 
         console.log(newUser)
+        setError(false);
+        try {
+            let res = axios.post(`http://localhost:8080/register`, newUser)
+                .then(res => {
+                    toast.success("Register Success!")
+                    
+                })
+        } catch (e) {
 
-        let res = axios.post(`http://localhost:8080/register`, newUser)
-            .then(res => {
-                console.log(res);
-                console.log(res.data);
-            })
+            setError(true);
+        }
     }
 
 
     return (
         <div style={{ backgroundImage: `url(${wood})`, backgroundSize: 'cover', height: '100vh', paddingTop: '1%' }}>
             <div style={{ marginLeft: '40%', marginTop: '10%' }}>
-                <LoginBorder>
+                <RegisterBorder>
                     <div style={{ marginTop: '5%' }}>
                         <h6 style={{ fontSize: '200%', color: 'grey' }}>Register</h6>
                         <form onSubmit={handleSubmit}>
@@ -97,14 +104,14 @@ export const Register: React.FunctionComponent<IRegister> = (props) => {
                                     </div>
                                 </Grid>
                                 <Grid item>
-                                    <Button href="/login" variant='contained' color='secondary' style={{marginRight: '5em'}}>Back To Login!</Button>
+                                    <Button href="/" variant='contained' color='secondary' style={{ marginRight: '5em' }}>Back To Login!</Button>
                                     <Button onClick={handleSubmit} type="submit" variant="outlined">Register!</Button>
                                 </Grid>
 
                             </Grid>
                         </form>
                     </div>
-                </LoginBorder>
+                </RegisterBorder>
             </div>
 
         </div>

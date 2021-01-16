@@ -33,7 +33,7 @@ function App() {
 
           <Switch>
 
-            <Route path="/login" exact component={Login} />
+            <Route path="/" exact component={Login} />
             
             <Route path='/register' exact component={Register} />
 

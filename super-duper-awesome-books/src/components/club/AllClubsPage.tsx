@@ -38,9 +38,9 @@ export const AllClubsPage = () => {
     return (
 
         <>
-
+            {/* TODO: make some sort of buttons to swap which clubs are displayed */}
             <NavigationBar />
-            <div style={{ backgroundImage: `url(${wood})`, backgroundSize: 'cover', height: '100vh', paddingTop: '1%' }}>
+            <div style={{ backgroundImage: `url(${wood})`, backgroundSize: 'cover', height:'100vh', paddingTop: '1%' }}>
                 {error && (
                     <ErrorText>Some error occurred, while fetching books API</ErrorText>
                 )}

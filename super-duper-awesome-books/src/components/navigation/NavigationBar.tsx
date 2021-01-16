@@ -34,7 +34,7 @@ export const NavigationBar: React.FunctionComponent<any> = (props) => {
             <Link to={`/search-page`} style={{ paddingRight: '5px' }}>
               <Button variant="outline-secondary" size="lg">Search Books!</Button>
             </Link>
-            <Link to={`/login`} style={{ paddingRight: '5px' }}>
+            <Link to={`/`} style={{ paddingRight: '5px' }}>
               <Button variant="outline-secondary" size="lg" >
                 Sign Out!
                                 </Button>

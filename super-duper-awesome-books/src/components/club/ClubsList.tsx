@@ -1,10 +1,11 @@
 import React from 'react'
-import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Grid, makeStyles, Typography, withStyles } from '@material-ui/core'
+import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, colors, Grid, makeStyles, Typography, withStyles } from '@material-ui/core'
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
     root: {
         maxWidth: 350,
+        height: 150,
     },
     media: {
         height: 300,
@@ -35,7 +36,7 @@ function Club(props) {
 
         <Card className={classes.root}>
             <CardActionArea>
-                {/* <CardMedia className={classes.media} image={props.club.bookImage} /> */}
+                {/* <CardMedia /> */}
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
                         {props.club.clubName}
@@ -45,8 +46,8 @@ function Club(props) {
                     </Typography>
 
                 </CardContent>
-                <Link to={`/search-clubs/${props.club.clubId}`} style={{ textDecoration: 'none' }}>
-                    <Button size="small" color="primary">
+                <Link to={`/search-clubs/${props.club.clubId}`} style={{ textDecoration: 'none'}}>
+                    <Button variant="outlined" size="small" color="primary">
                         Go to Club
                 </Button>
                 </Link>

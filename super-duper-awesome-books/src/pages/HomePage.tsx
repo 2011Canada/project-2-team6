@@ -31,7 +31,7 @@ export const HomePage: React.FunctionComponent<any> = (props) => {
     const loggedInUsername = localStorage.getItem('username')
 
     return (
-        <div>
+        <div style={{backgroundColor:'#f5e0d1', height:'100vh'}}>
 
             <div style={{ width: "100%", position: 'relative' }}>
                 <Navbar style={{ height: "100%" }} collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -56,7 +56,7 @@ export const HomePage: React.FunctionComponent<any> = (props) => {
                             <Link to={`/search-page`} style={{ paddingRight: '5px' }}>
                                 <Button variant="outline-secondary" size="lg">Search Books!</Button>
                             </Link>
-                            <Link to={`/login`} style={{ paddingRight: '620px' }}>
+                            <Link to={`/`} style={{ paddingRight: '620px' }}>
                                 <Button variant="outline-secondary" size="lg" >
                                     Sign Out!
                                 </Button>

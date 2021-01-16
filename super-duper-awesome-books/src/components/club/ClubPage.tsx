@@ -239,7 +239,7 @@ export const Club: React.FunctionComponent<any> = ({match}) => {
 
     return (
 
-        <div className="content">
+        <div>
             
             <NavigationBar style={{marginRight:'10%'}}/>
             <div className="dashboard">
@@ -393,7 +393,7 @@ export const Club: React.FunctionComponent<any> = ({match}) => {
                 </List>
 
             </div>
-            <div style={{ marginBottom: '10%' }}>
+            <div style={{ marginBottom: '5%' }}>
 
                 {hasUser &&
                     <React.Fragment>
@@ -405,7 +405,7 @@ export const Club: React.FunctionComponent<any> = ({match}) => {
                             onChange={handleChangeUserComment}
                             variant="outlined"
                         />
-                        <div style={{marginTop: '2em'}}>
+                        <div style={{marginTop: '1em'}}>
                             <Button variant="contained" onClick={submitUserComment}>Submit Comment</Button>
                         </div>
                     </React.Fragment>

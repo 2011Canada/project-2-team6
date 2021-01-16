@@ -54,11 +54,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
 //Requirements: Prop user object with username and userid, should be enclosed in an authentication component
 export const MyProfile: React.FunctionComponent<any> = (props) => {
-    
+
     const loggedInUser = localStorage.getItem('user')
     const loggedInUsername = localStorage.getItem('username')
- 
-    
+    const loggedinUserFirstName = localStorage.getItem('firstname')
+    const loggedinUserLastName = localStorage.getItem('lastname')
+
+
     const classes = useStyles();
     const [userDescription, changeDescription] = useState("");
     const [profileImage, changeProfileImage] = useState("");
@@ -131,9 +133,10 @@ export const MyProfile: React.FunctionComponent<any> = (props) => {
 
     return (
 
-        <div className="content">
+        <div className="content" style={{backgroundColor: '#f5e0d1'}}>
             <NavigationBar />
-            <div className="dashboard" style={{ marginTop: '6%' }}>
+            <div className="dashboard" style={{ marginTop: '1%' }}>
+                <h6 style={{fontSize:'200%', color:'gray'}}>{`Welcome Back ${loggedinUserFirstName} ${loggedinUserLastName}!`}</h6>
                 <Card className={classes.root}>
 
                     <CardMedia
@@ -176,7 +179,7 @@ export const MyProfile: React.FunctionComponent<any> = (props) => {
             </div>
 
 
-            <div style={{ backgroundImage: `url(${Bookshelf})`, marginTop: '2%', marginLeft: '1%', marginRight: '1%', display: "flex", height: '110vh', padding: "3%" }}>
+            <div style={{ backgroundImage: `url(${Bookshelf})`, marginTop: '2%', marginLeft: '1%', marginRight: '1%', display: "flex", height: '120vh', padding: "3%" }}>
 
                 {bookmarks.map((bookmark, index) => {
                     console.log(bookmark.bookId)
@@ -199,11 +202,13 @@ export const MyProfile: React.FunctionComponent<any> = (props) => {
                             <Link to={`/book/${bookmark.bookId}`} style={{ textDecoration: 'none' }}>
                                 <img src={bookmark.bookImage} />
                             </Link>
-                            <Button variant="contained"
-                                color="secondary"
-                                className={classes.button}
-                                startIcon={<DeleteIcon />} onClick={deleteBookmark} >Delete Bookmark
-                            </Button>
+                            <div>
+                                <Button variant="contained"
+                                    color="secondary"
+                                    className={classes.button}
+                                    startIcon={<DeleteIcon />} onClick={deleteBookmark} >Delete Bookmark
+                                </Button>
+                            </div>
                         </div>
                     )
                 }

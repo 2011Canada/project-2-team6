@@ -5,6 +5,7 @@ import ErrorText from "../components/ErrorText";
 import BookDetail from "../components/BookDetail";
 import SearchPage from "./SearchPage";
 import NavigationBar from "../components/navigation/NavigationBar";
+import backlitWood from '../pictures/backlitWood.jpg'
 
 const BookDetailPage = ({ match }) => {
   const { params: { bookId } } = match;
@@ -29,12 +30,14 @@ const BookDetailPage = ({ match }) => {
   return (
     <>
       <NavigationBar />
-      <div style={{ marginRight: '5%',  marginTop: '5%'}}>
-        {/* <Link to={`/search-page`}>Go back to search books</Link> */}
-        {error && (
-          <ErrorText>Some error occurred, while fetching books API</ErrorText>
-        )}
-        {book && <BookDetail book={book} />}
+      <div style={{ backgroundImage: `url(${backlitWood})`, backgroundSize: 'cover', height: '120vh', paddingTop:'1%', paddingBottom:'5%' }}>
+        <div style={{ marginRight: '5%', marginTop: '2%' }}>
+          {/* <Link to={`/search-page`}>Go back to search books</Link> */}
+          {error && (
+            <ErrorText>Some error occurred, while fetching books API</ErrorText>
+          )}
+          {book && <BookDetail book={book} />}
+        </div>
       </div>
 
     </>

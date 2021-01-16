@@ -33,9 +33,8 @@ export const Login: React.FunctionComponent = (props) => {
                 setUser(user.data)
                 localStorage.setItem('user', user.userId)
                 localStorage.setItem('username', user.username)
-                console.log(user.userId)
-                console.log(user.username)
-                console.log(localStorage)
+                localStorage.setItem('firstname', user.firstName)
+                localStorage.setItem('lastname', user.lastName)
                 if (user) {
                     authentication(user);
                 } else {

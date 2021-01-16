@@ -4,7 +4,6 @@ import { bookAuthors } from '../utils/authorLogic';
 import Rating from '@material-ui/lab/Rating';
 import { Link } from "react-router-dom";
 import { Bookmark } from '@material-ui/icons';
-import { toast } from 'react-toastify';
 import axios from 'axios';
 
 const useStyles = makeStyles({
@@ -53,11 +52,10 @@ const BookDetail = ({ book }) => {
         console.log(newBookMark)
         try{
             const res = axios.post(`http://localhost:8080/bookmarks`, newBookMark)
-            toast.success("Bookmarked!")
+
             setBookmark(res)
         } catch(error) {
             setError(true);
-            toast.error("Something Went Wrong!")
         };
     }
     
@@ -108,8 +106,8 @@ const BookDetail = ({ book }) => {
                 <div
                     style={{
                         display: "flex",
-
-                        marginTop: "2em",
+                        backgroundColor:'lightsalmon',
+                        marginTop: "3em",
                         marginLeft: "37%",
                         width: 600,
                     }}>
