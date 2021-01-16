@@ -1,10 +1,11 @@
-import { Button, Card, CardActions, Grid, CardContent, CardMedia, createStyles, Divider, List, ListItem, ListItemText, makeStyles, TextField, Theme, Typography } from '@material-ui/core'
+import { Button, Card, CardActions, CardContent, CardMedia, createStyles, makeStyles, TextField, Theme, Typography } from '@material-ui/core'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import ScrollUpButton from "react-scroll-up-button";
 import Bookshelf from './Bookshelf.jpg'
 import { Link } from "react-router-dom";
-
+import { toast } from 'react-toastify';
+import DeleteIcon from '@material-ui/icons/Delete';
+import NavigationBar from '../navigation/NavigationBar';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -41,7 +42,10 @@ const useStyles = makeStyles((theme: Theme) =>
             fontSize: "1.5vh",
             float: "right",
             bottom: "0"
-        }
+        },
+        button: {
+            margin: theme.spacing(1),
+        },
     }),
 );
 
@@ -50,14 +54,16 @@ const useStyles = makeStyles((theme: Theme) =>
 
 //Requirements: Prop user object with username and userid, should be enclosed in an authentication component
 export const MyProfile: React.FunctionComponent<any> = (props) => {
+    
+    const loggedInUser = localStorage.getItem('user')
+    const loggedInUsername = localStorage.getItem('username')
+ 
+    
     const classes = useStyles();
-    const [userDescription, changeDescription] = useState("")
-    const [userReviews, changeReviews] = useState(new Array<any>())
-    const [profileImage, changeProfileImage] = useState("")
-    const [offset, changeOffset] = useState(0)
-    const [limit, changeLimit] = useState(5)
-    const [descriptionEditOpened, changeDescriptionEditingStatus] = useState(false)
-    const [bookmarks, changeBookmarks] = useState([])
+    const [userDescription, changeDescription] = useState("");
+    const [profileImage, changeProfileImage] = useState("");
+    const [descriptionEditOpened, changeDescriptionEditingStatus] = useState(false);
+    const [bookmarks, changeBookmarks] = useState([]);
 
     //Runs on first load
     useEffect(() => {
@@ -80,29 +86,16 @@ export const MyProfile: React.FunctionComponent<any> = (props) => {
     let retrievBookmarksById = async () => {
         try {
             const API_BASE_URL = `http://localhost:8080`;
-            let response: any = await axios.get(`${API_BASE_URL}/bookmarks/${props.user.userid}`);
+            let response: any = await axios.get(`${API_BASE_URL}/bookmarks/${loggedInUser}`);
             let data: any = response.data
             changeBookmarks(data)
         }
 
         catch (e) {
-            console.log(e.stack)
         }
 
     }
-    let deleteBookmark = async () => {
-        try {
-            const API_BASE_URL = `http://localhost:8080`;
-            let response: any = await axios.post(`${API_BASE_URL}/bookmarks/${props.user.userid}/${props.bookmark.bookId}`);
-            let data: any = response.data
-            changeBookmarks(data)
-        }
 
-        catch (e) {
-            console.log(e.stack)
-        }
-
-    }
 
     let getProfileImage = async () => {
 
@@ -139,19 +132,20 @@ export const MyProfile: React.FunctionComponent<any> = (props) => {
     return (
 
         <div className="content">
+            <NavigationBar />
             <div className="dashboard" style={{ marginTop: '6%' }}>
                 <Card className={classes.root}>
 
                     <CardMedia
                         component="img"
-                        alt={props.user.username}
+                        alt={loggedInUsername}
                         height="340"
                         image={profileImage}
-                        title={props.user.username}
+                        title={loggedInUsername}
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
-                            {props.user.username}
+                            {loggedInUsername}
                         </Typography>
                         {!descriptionEditOpened &&
 
@@ -182,16 +176,34 @@ export const MyProfile: React.FunctionComponent<any> = (props) => {
             </div>
 
 
-            <div style={{ backgroundImage: `url(${Bookshelf})`, marginTop: '2%', marginLeft: '1%', marginRight: '1%', display: "flex", padding: "3%" }}>
+            <div style={{ backgroundImage: `url(${Bookshelf})`, marginTop: '2%', marginLeft: '1%', marginRight: '1%', display: "flex", height: '110vh', padding: "3%" }}>
 
                 {bookmarks.map((bookmark, index) => {
+                    console.log(bookmark.bookId)
+                    const deleteBookmark = async () => {
+                        try {
+                            const API_BASE_URL = `http://localhost:8080`;
+                            let response: any = await axios.delete(`${API_BASE_URL}/bookmarks/${loggedInUser}/${bookmark.bookId}`);
+                            let data: any = response.data
+                            changeBookmarks(data)
+                        }
+
+                        catch (e) {
+                            toast.error("Something went wrong!")
+                        }
+                        window.location.reload();
+                    }
                     return (
 
                         <div style={{ padding: "1%" }}>
                             <Link to={`/book/${bookmark.bookId}`} style={{ textDecoration: 'none' }}>
                                 <img src={bookmark.bookImage} />
                             </Link>
-                            <Button onClick={deleteBookmark}>Delete Bookmark</Button>
+                            <Button variant="contained"
+                                color="secondary"
+                                className={classes.button}
+                                startIcon={<DeleteIcon />} onClick={deleteBookmark} >Delete Bookmark
+                            </Button>
                         </div>
                     )
                 }

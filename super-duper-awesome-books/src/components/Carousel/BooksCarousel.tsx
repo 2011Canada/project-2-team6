@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Grid, makeStyles, withStyles } from '@material-ui/core'
+import { Button, Card, CardActionArea, CardMedia, makeStyles } from '@material-ui/core'
 import Carousel from 'react-material-ui-carousel'
 import { Paper } from '@material-ui/core'
 import { Link } from "react-router-dom";
@@ -14,8 +14,6 @@ const useStyles = makeStyles({
 });
 
 export const BooksCarousel = ({ books }) => {
-
-    console.log(books);
 
     return (
         <div style={{ width: '60%', marginLeft: '10%' }}>

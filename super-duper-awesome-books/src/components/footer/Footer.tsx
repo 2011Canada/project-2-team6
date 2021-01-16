@@ -10,7 +10,7 @@ export const Footer: React.FunctionComponent<any> = (props) => {
 
 
       <div className="footer-copyright text-center">
-        &copy; {new Date().getFullYear()} Copyright: <a href="https://github.com/2011Canada/project-2-team6-frontEnd">
+        &copy; {new Date().getFullYear()} Copyright: <a href="https://github.com/2011Canada/project-2-team6-frontEnd" target="_blank" >
           <img style={{ height: "50px", width: "50px", borderRadius: "40px" }} src={gitlogo} alt="Logo" />
         </a></div>
 

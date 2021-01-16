@@ -1,23 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import styled from "@emotion/styled";
 import 'react-toastify/dist/ReactToastify.css';
+import NavigationBar from "../components/navigation/NavigationBar";
 import { Container } from "../components/SharedBackGround";
 import BooksList from "../components/BookList";
 import ErrorText from "../components/ErrorText";
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from "react-toastify";
-
-
-const HeaderContainer = styled(Container)`
-
-  margin-left: 25%;
-  align-items: center;
-`;
-
-const HeaderSearchForm = styled.div`
-  margin-left: auto;
-`;
 
 export const SubjectSelectionBox = ({ match }) => {
     const { params: { subjectType } } = match;
@@ -31,7 +20,6 @@ export const SubjectSelectionBox = ({ match }) => {
             try {
                 const result = await axios.get(`${API_BASE_URL}?q=subject:${subjectType}&maxResults=40&orderBy=newest`);
                 setBooks(result.data);
-                toast.info("Loading!")
             } catch (error) {
                 setError(true);
                 toast.error("Something Went Wrong!")
@@ -43,7 +31,7 @@ export const SubjectSelectionBox = ({ match }) => {
     return (
 
         <>
-            
+            <NavigationBar />
             <div>
                 {error && (
                     <ErrorText>Some error occurred, while fetching books API</ErrorText>

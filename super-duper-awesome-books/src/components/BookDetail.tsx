@@ -18,6 +18,9 @@ const useStyles = makeStyles({
 
 const BookDetail = ({ book }) => {
 
+    const loggedInUser = localStorage.getItem('user')
+    console.log(loggedInUser)
+
     const [bookmark, setBookmark] = useState(null);
     const [error, setError] = useState(false);
 
@@ -28,9 +31,9 @@ const BookDetail = ({ book }) => {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
 
-    const handleClick = () => {
-        Bookmark(book);//need to go make a bookmark model right now it's just importing from material ui icons so compiler stops yelling
-    };
+    // const handleClick = () => {
+    //     Bookmark(book);
+    // };
 
     const handleClose = () => {
         setAnchorEl(null);
@@ -42,7 +45,7 @@ const BookDetail = ({ book }) => {
 
         const newBookMark = {
             bookId: book.id,
-            // userId: , 
+            userId: loggedInUser, 
             bookImage: `http://books.google.com/books/content?id=${book.id}&printsec=frontcover&img=1&zoom=1&source=gbs_api`,
             bookTitle: book.volumeInfo.title
         }
@@ -91,7 +94,7 @@ const BookDetail = ({ book }) => {
                             </CardActionArea>
                             <CardActions>
 
-                                <Button aria-controls="fade-menu" aria-haspopup="true" onClick={handleClick} style={{ color: '#3e5abb' }}>
+                                <Button aria-controls="fade-menu" aria-haspopup="true" onClick={handleSubmit} style={{ color: '#3e5abb' }}>
                                     Save to Bookmarks
                                 </Button>
 

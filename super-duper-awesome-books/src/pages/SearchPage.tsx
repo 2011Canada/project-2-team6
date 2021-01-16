@@ -5,7 +5,6 @@ import { Container } from "../components/SharedBackGround";
 import BookSearchForm from "../components/BookSearchForm";
 import BooksList from "../components/BookList";
 import ScrollUpButton from "react-scroll-up-button";
-import { BrowserRouter as Router, Route, Switch, Link, useParams } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 import NavigationBar from "../components/navigation/NavigationBar";
 
@@ -54,6 +53,7 @@ const SearchPage = () => {
       {/* <HeaderContainer>
         <HeaderSearchForm> */}
       {/* <div style={{zIndex: 100}}> */}
+      <NavigationBar />
       <div style={{marginTop:'2em'}}>
         <BookSearchForm
           onSubmitHandler={onSubmitHandler}

@@ -45,11 +45,11 @@ export const Register: React.FunctionComponent<IRegister> = (props) => {
         e.preventDefault();
 
         const newUser = {
-            userName: username,
+            username: username,
             firstName: firstname,
             lastName: lastname,
-            userEmail: email,
-            userPassword: password
+            email: email,
+            password: password
         }
 
         console.log(newUser)
@@ -63,12 +63,11 @@ export const Register: React.FunctionComponent<IRegister> = (props) => {
 
 
     return (
-        <div style={{backgroundImage: `url(${wood})`, backgroundSize: 'cover', height: '100vh', paddingTop:'1em'}}>
-          
-            <div style={{ marginLeft: '40%', marginTop: '10%'}}>
+        <div style={{ backgroundImage: `url(${wood})`, backgroundSize: 'cover', height: '100vh', paddingTop: '1%' }}>
+            <div style={{ marginLeft: '40%', marginTop: '10%' }}>
                 <LoginBorder>
                     <div style={{ marginTop: '5%' }}>
-                        <h6 style={{fontSize: '200%', color: 'grey'}}>Register</h6>
+                        <h6 style={{ fontSize: '200%', color: 'grey' }}>Register</h6>
                         <form onSubmit={handleSubmit}>
                             <Grid
                                 container
@@ -98,7 +97,8 @@ export const Register: React.FunctionComponent<IRegister> = (props) => {
                                     </div>
                                 </Grid>
                                 <Grid item>
-                                    <Button onClick={handleSubmit} href="/" type="submit" variant="outlined">Register</Button>
+                                    <Button href="/login" variant='contained' color='secondary' style={{marginRight: '5em'}}>Back To Login!</Button>
+                                    <Button onClick={handleSubmit} type="submit" variant="outlined">Register!</Button>
                                 </Grid>
 
                             </Grid>

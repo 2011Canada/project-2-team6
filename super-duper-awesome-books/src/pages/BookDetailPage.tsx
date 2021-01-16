@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import ErrorText from "../components/ErrorText";
 import BookDetail from "../components/BookDetail";
+import SearchPage from "./SearchPage";
+import NavigationBar from "../components/navigation/NavigationBar";
 
 const BookDetailPage = ({ match }) => {
   const { params: { bookId } } = match;
@@ -25,6 +28,7 @@ const BookDetailPage = ({ match }) => {
 
   return (
     <>
+      <NavigationBar />
       <div style={{ marginRight: '5%',  marginTop: '5%'}}>
         {/* <Link to={`/search-page`}>Go back to search books</Link> */}
         {error && (
