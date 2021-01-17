@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SearchPage from './pages/SearchPage';
 import BookDetailPage from './pages/BookDetailPage';
 import HomePage from './pages/HomePage';
-import { MyProfile } from './components/user-profile/MyProfile';
+import {MyProfile} from './components/user-profile/MyProfile';
 import { OtherProfile } from './components/user-profile/OtherProfile';
 import ScrollUpButton from "react-scroll-up-button";
 import { Register } from './pages/RegisterPage';
@@ -13,6 +13,8 @@ import Footer from './components/footer/Footer';
 import DisplayNav from './components/navigation/NavigationBar'
 import { User } from './components/Model/User';
 import LoginForm from './pages/LoginPage';
+import { AuthContext, UserAuth } from './components/protected-route/UserAuth';
+import ProtectRoute from './components/protected-route/ProtectRoute';
 
 const NoMatchRoute = () => <div>404 Page Not Found</div>;
 export const UserContext = React.createContext<any>(undefined)
@@ -28,7 +30,7 @@ function App() {
     <div className="App">
 
       <div>
-
+<AuthContext.Provider value={User}>
         <Router>
         <DisplayNav currentUser={User}/>
 
@@ -36,9 +38,14 @@ function App() {
             <Route  path="/test">
           <DisplayNav currentUser={User}/>
             </Route>
-            <Route path="/myprofile">
-              <MyProfile user={User} />
-            </Route>
+            <Route path="/myprofile" render={() => {
+<UserAuth>
+  <MyProfile/>
+  </UserAuth>
+              
+            }}/>
+              
+  
             <Route path="/otherprofile">
               <OtherProfile user={User} />
             </Route>
@@ -57,6 +64,7 @@ function App() {
             <Route component={NoMatchRoute} />
           </Switch>
         </Router>
+        </AuthContext.Provider>
         <ScrollUpButton />
       </div>
       <Footer />

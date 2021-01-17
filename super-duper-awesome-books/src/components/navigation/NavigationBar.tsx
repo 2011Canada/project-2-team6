@@ -43,7 +43,7 @@ export const NavigationPostLogin: React.FunctionComponent<any> = (props) => {
         <Navbar.Collapse id="responsive-navbar-nav">
 
           <div style={{ position: "absolute", right: "0", }}>
-              <Button href="/myprofile/:userid" variant="outline-secondary" size="lg" style={{marginRight:'10px'}}>
+              <Button href="/myprofile/" variant="outline-secondary" size="lg" style={{marginRight:'10px'}}>
                 profile
             </Button>
             <Button variant="outline-secondary" size="lg" style={{marginRight:'10px'}}>

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import ScrollUpButton from "react-scroll-up-button";
 import Bookshelf from './Bookshelf.jpg'
 import { Link } from "react-router-dom";
+import ProtectRoute from '../protected-route/ProtectRoute';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -80,7 +81,7 @@ export const MyProfile: React.FunctionComponent<any> = (props) => {
     let retrievBookmarksById = async () => {
         try {
             const API_BASE_URL = `http://localhost:8080`;
-            let response: any = await axios.get(`${API_BASE_URL}/bookmarks/${props.user.userid}`);
+            let response: any = await axios.get(`${API_BASE_URL}/bookmarks/${props.User.userId}`);
             let data: any = response.data
             changeBookmarks(data)
         }
@@ -93,7 +94,7 @@ export const MyProfile: React.FunctionComponent<any> = (props) => {
     let deleteBookmark = async () => {
         try {
             const API_BASE_URL = `http://localhost:8080`;
-            let response: any = await axios.post(`${API_BASE_URL}/bookmarks/${props.user.userid}/${props.bookmark.bookId}`);
+            let response: any = await axios.post(`${API_BASE_URL}/bookmarks/${props.User.userId}/${props.User.bookmark.bookId}`);
             let data: any = response.data
             changeBookmarks(data)
         }
@@ -140,18 +141,18 @@ export const MyProfile: React.FunctionComponent<any> = (props) => {
 
         <div className="content">
             <div className="dashboard" style={{ marginTop: '6%' }}>
-                <Card className={classes.root}>
+                 <Card className={classes.root}>
 
                     <CardMedia
                         component="img"
-                        alt={props.user.username}
+                        alt={props.user.userName} //
                         height="340"
                         image={profileImage}
-                        title={props.user.username}
+                        title={props.user.userName}
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
-                            {props.user.username}
+                            {props.user.userName}
                         </Typography>
                         {!descriptionEditOpened &&
 
@@ -177,7 +178,7 @@ export const MyProfile: React.FunctionComponent<any> = (props) => {
                     <CardActions>
 
                     </CardActions>
-                </Card>
+                </Card> */
 
             </div>
 
@@ -207,4 +208,4 @@ export const MyProfile: React.FunctionComponent<any> = (props) => {
 
 }
 
-export default MyProfile;
+export default ProtectRoute(MyProfile)
