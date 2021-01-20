@@ -10,6 +10,8 @@ The Super Duper Awesome Books (SDAB) allows users who have accounts to login and
 * Spring Data
 * Java 14.0.2
 * PostgreSQL 13.1
+* Google Books API
+* Maven
 * Deployment Front-End/Back-End (AWS EC2 Docker)
 
 
@@ -42,9 +44,17 @@ The Super Duper Awesome Books (SDAB) allows users who have accounts to login and
 
 * Make buttons to swap which clubs are going to be displayed
 
+## Contributors
 
+* [<https://github.com/HenryHsieh999>](<https://github.com/HenryHsieh999>)
+* [<https://github.com/Hrammal15>](<https://github.com/Hrammal15>)
+* [<https://github.com/Stephen491>](<https://github.com/Stephen491>)
+* [<https://github.com/jeevanselva>](<https://github.com/jeevanselva>)
+
+##Backend Code
+* [<https://github.com/2011Canada/project-2-team6-backEnd>](<https://github.com/2011Canada/project-2-team6-backEnd>)
 
 
 ## License
 
-This project uses the following license: [<>](<>).
+This project uses the following license: [<https://github.com/2011Canada/project-2-team6-frontEnd/blob/main/LICENSE>](<https://github.com/2011Canada/project-2-team6-frontEnd/blob/main/LICENSE>).
