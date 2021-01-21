@@ -46,10 +46,10 @@ The Super Duper Awesome Books (SDAB) allows users who have accounts to login and
 
 ## Contributors
 
-* [<https://github.com/HenryHsieh999>](<https://github.com/HenryHsieh999>)
-* [<https://github.com/Hrammal15>](<https://github.com/Hrammal15>)
-* [<https://github.com/Stephen491>](<https://github.com/Stephen491>)
-* [<https://github.com/jeevanselva>](<https://github.com/jeevanselva>)
+* [Henry Hsieh](<https://github.com/HenryHsieh999>)
+* [Hassen Rammal](<https://github.com/Hrammal15>)
+* [Stephen Wong](<https://github.com/Stephen491>)
+* [Sayeepan Selvagunarajah(Jeevan)](<https://github.com/jeevanselva>)
 
 ## Backend Code
 * [<https://github.com/2011Canada/project-2-team6-backEnd>](<https://github.com/2011Canada/project-2-team6-backEnd>)
