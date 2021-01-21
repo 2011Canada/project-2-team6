@@ -1,7 +1,7 @@
 # Super Duper Awesome Books
 ## Project Description
 
-The Super Duper Awesome Books (SDAB) allows users who have accounts to login and enjoy all the features of this awesome program!
+The Super Duper Awesome Books (SDAB) allows users who have accounts to login and enjoy all the features of this awesome program ranging from joining clubs, discussion with club members, searching for books and bookmarking the ones that interest them!
 
 ## Technologies Used
 
